@@ -28,7 +28,16 @@ const NavButton = ({ label, icon, setOpenedWindow, width }) => {
   return (
     <button
       onClick={openWindow}
-      className="flex flex-col items-center space-y-2 text-center group active:scale-95 text-gray-800 dark:text-white bg-black/15 dark:bg-white/15 md:bg-transparent md:dark:bg-transparent p-5  px-7  md:px-0 md:p-0 rounded-lg"
+      className="flex flex-col items-center space-y-3 text-center group active:scale-95 transition-all duration-200 
+      text-gray-800 dark:text-white 
+      bg-white dark:bg-slate-800 
+      md:bg-transparent md:dark:bg-transparent 
+      border-2 border-gray-200 dark:border-slate-700 
+      md:border-0
+      p-6 px-8 md:px-0 md:p-0 
+      rounded-2xl md:rounded-none
+      shadow-md hover:shadow-lg md:hover:shadow-none md:shadow-none
+      hover:border-[#424242] dark:hover:border-white/40 md:hover:border-0"
     >
       <Image
         src={icon}
@@ -39,9 +48,9 @@ const NavButton = ({ label, icon, setOpenedWindow, width }) => {
           width: `${w}px`,
           height: "auto",
         }}
-        className={`w-16 md:w-[${w}px] drop-shadow-xl transition-transform group-hover:scale-105 group-active:scale-100 dark:`}
+        className="w-20 md:w-[80px] drop-shadow-xl transition-transform group-hover:scale-110 group-active:scale-100"
       />
-      <p className="text-xl font-semibold ">{label}</p>
+      <p className="text-lg md:text-xl font-semibold capitalize">{label}</p>
     </button>
   );
 };
@@ -52,7 +61,7 @@ const MainWindow = ({ setOpenedWindow }) => {
   const taglines = [
     "Dev by Day, Side Project Goblin by Night",
     "CSS Wizard with Too Many Tabs Open",
-    "I Turn 'Just an Idea' into 'Oh, It’s Live'",
+    "I Turn 'Just an Idea' into 'Oh, It's Live'",
     "Built with Love, Caffeine & Console Logs",
   ];
 
@@ -65,7 +74,7 @@ const MainWindow = ({ setOpenedWindow }) => {
 
   return (
     <div className="w-full z-10 space-y-[1px] md:max-w-[700px]">
-      {/* Top bar */}
+      {/* Top bar - Desktop only */}
       <div className="hidden md:flex h-14 items-center px-4 min-w-[700px] bg-[#424242] rounded-t-lg drop-shadow-md border">
         <p className="text-2xl font-bold text-white">home</p>
       </div>
@@ -73,22 +82,26 @@ const MainWindow = ({ setOpenedWindow }) => {
       {/* Main content */}
       <div
         className="
-        min-h-[500px] p-5 gap-10 flex flex-col justify-center items-center
+        min-h-[500px] p-6 md:p-5 gap-8 md:gap-10 flex flex-col justify-center items-center
         md:min-w-[700px] md:border-2 md:border-[#424242] md:border-opacity-35 md:bg-white md:dark:bg-slate-800
         rounded-b-lg drop-shadow-xl md:dark:border-white
       "
       >
-        <div className="pt-10 text-center space-y-4">
-          <h1 className="text-5xl font-extrabold dark:text-white">
+        {/* Header Section */}
+        <div className="pt-6 md:pt-10 text-center space-y-3 md:space-y-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white leading-tight">
             hi!{" "}
             <span className="text-orange-500 dark:text-blue-300">
               i'm abdelrahman
             </span>
           </h1>
-          <p className="text-2xl min-h-9 dark:text-white">{randomTagline}</p>
+          <p className="text-lg md:text-2xl min-h-7 md:min-h-9 dark:text-white px-4">
+            {randomTagline}
+          </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-y-8 gap-x-10 md:gap-y-10">
+        {/* Navigation Buttons Grid */}
+        <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-4 md:gap-y-10 md:gap-x-10 w-full max-w-md md:max-w-none">
           {navItems.map((item) => {
             if (item.label === "resume") {
               if (windowWidth > 768) {

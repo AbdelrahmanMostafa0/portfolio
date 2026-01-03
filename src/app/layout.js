@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import MobileWarning from "@/components/MobileWarning";
 import "../styles/globals.css";
 import { WindowProvider } from "@/context/WindowsContext";
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
         <WindowProvider>
           <Header />
           {children}
+          <MobileWarning />
         </WindowProvider>
       </body>
     </html>

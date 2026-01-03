@@ -1,161 +1,167 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
-import { IoEye } from "react-icons/io5";
-import { FaEye, FaGithub } from "react-icons/fa";
+import { IoEye, IoSearch } from "react-icons/io5";
+import { FaGithub } from "react-icons/fa";
+import projects from "@/data/projects";
 
 const Work = () => {
-  // Projects Data
-  const projects = [
-    {
-      title: "Lesoll",
-      link: "https://lesoll.com",
-      imageSrc: "/work/lesoll.png",
-      technologies: ["React", "Nextjs", "Tailwind", "Redux toolkit", "I18n"],
-      description: [
-        "Built with Next.js & Tailwind CSS",
-        "Responsive UI for property & car listings and marketing pages",
-        "Developed a custom admin dashboard with traffic & analytics overview",
-        "Integrated backend APIs for dynamic data rendering",
-        "Deployed on AWS for scalability and performance",
-        "Implemented SEO best practices for improved visibility",
-        "Continuously optimized performance across the platform",
-      ],
-    },
-    {
-      title: "Dorymart",
-      link: "https://dory-mart.vercel.app",
-      github: "https://github.com/AbdelrahmanMostafa0/dory-mart",
-      imageSrc: "/work/dory.png",
-      technologies: ["React", "Nextjs", "Tailwind", "GSAP", "Redux toolkit"],
-      description: [
-        "Concept: Fun, vibrant e-commerce platform inspired by Dory from Finding Nemo for an engaging shopping experience",
-        "Product Listings: Browse products with detailed descriptions, images, and pricing",
-        "Search & Filtering: Easy-to-use search functionality and product filters for quick browsing",
-        "Shopping Cart: Manage products in the cart before checkout with seamless transitions",
-        "State Management: Uses Redux for efficient management of application state",
-        "Animations: Enhanced user experience with GSAP for playful and engaging animations",
-        "Performance & SEO: Server-side rendering (SSR) ensures fast load times and improved search engine ranking",
-        "Persistent Cart: Cart data persists in local storage, so users don’t lose selections upon page refresh",
-      ],
-    },
-    {
-      title: "Squash It",
-      link: "https://image-compressor-gules.vercel.app/ar",
-      github: "https://github.com/AbdelrahmanMostafa0/image-compressor",
-      imageSrc: "/work/squash-it-light.png",
-      technologies: [
-        "React",
-        "Nextjs",
-        "Tailwind",
-        "I18n",
-        "Framer Motion",
-        "Redux toolkit",
-      ],
-      description: [
-        "Overview: A lightweight web app that compresses images directly in the browser using the browser-image-compression library for efficient optimization",
-        "Image Compression: Compresses images in the browser without any server-side processing",
-        "Customizable Settings: Adjust image quality percentage, define max size, and choose output format (JPG, PNG, WEBP)",
-        "Drag and Drop Support: Easily add images by dragging and dropping them into the app",
-        "Dark and Light Mode: Switch between dark and light themes for improved usability and aesthetics",
-        "Globalization: Support for Arabic (ar) and English (en) languages, with easy toggling",
-      ],
-    },
-    {
-      title: "The palestinian world",
-      link: "https://the-palestinian-world.vercel.app/",
-      imageSrc: "/work/the-palestinian-world.png",
-      technologies: ["HTML CANVAS", "javascript", "HTML", "CSS"],
-      description: [
-        "Concept: A visual solidarity tool to overlay the Palestinian flag frame on any image",
-        "Language Support: Offers full bilingual support with Arabic and English toggles",
-        "Dark Mode: Users can switch between light and dark themes for better accessibility",
-        "Image Upload: Upload your photo and see it live within the flag frame",
-        "Custom Positioning: Move and scale your image freely within the frame using drag-and-drop",
-        "Canvas API: Utilizes HTML5 Canvas to render and merge image with the flag frame",
-        "Download Feature: Export your final creation as a downloadable image with a single click",
-        "Tech Stack: Built using Vanilla JavaScript, HTML, and CSS without external libraries",
-      ],
-    },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredProjects = projects.filter((project) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      project.title.toLowerCase().includes(query) ||
+      project.technologies.some((tech) => tech.toLowerCase().includes(query)) ||
+      project.description.some((desc) => desc.toLowerCase().includes(query))
+    );
+  });
+
+  const highlightText = (text, query) => {
+    if (!query.trim()) return text;
+
+    const regex = new RegExp(`(${query})`, "gi");
+    const parts = text.split(regex);
+
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <mark
+          key={index}
+          className="bg-yellow-300 dark:bg-yellow-600 text-black dark:text-white px-0.5 rounded"
+        >
+          {part}
+        </mark>
+      ) : (
+        part
+      )
+    );
+  };
 
   return (
-    <div className="space-y-4 md:pb-2 pb-10">
-      <h3 className="text-2xl font-bold text-black dark:text-white">
-        PROJECTS
-      </h3>
+    <div className="space-y-5 md:pb-2 pb-10 w-full">
+      {/* Search Bar */}
+      <div className="relative">
+        <IoSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-xl" />
+        <input
+          type="text"
+          placeholder="Search projects by name, tech, or features..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full pl-12 pr-4 py-3 border-2 border-[#424242] dark:border-white/20 rounded-lg bg-white dark:bg-slate-800 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+        />
+      </div>
 
+      {/* Results Count */}
+      {searchQuery && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Found {filteredProjects.length} project
+          {filteredProjects.length !== 1 ? "s" : ""}
+        </p>
+      )}
+
+      {/* Projects List */}
       <div className="space-y-6">
-        {projects.map((project, index) => (
-          <div key={index} className="space-y-4 dark:text-white">
-            <a
-              target="_blank"
-              href={project.link}
-              className="relative group flex items-center justify-center rounded-lg overflow-hidden md:w-[98%] border"
+        {filteredProjects.length > 0 ? (
+          filteredProjects.map((project, index) => (
+            <div
+              key={index}
+              className="border-2 border-[#424242] dark:border-white/20 rounded-lg bg-white dark:bg-slate-800 p-5 space-y-5 transition-all duration-300 hover:shadow-lg"
             >
-              <div className="absolute inset-0 bg-gradient-to-r z-10  bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300"></div>
-              <IoEye className="absolute z-10 text-4xl  opacity-0 group-hover:opacity-100 duration-300 text-white/70" />
-              <Image
-                src={project.imageSrc}
-                width={500}
-                height={500}
-                alt={project.title}
-                className="w-full"
-              />
-            </a>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h3 className="text-xl font-bold">{project.title}</h3>
-              <div className="flex flex-wrap gap-3">
-                {project?.github && (
-                  <a
-                    target="_blank"
-                    href={project.github}
-                    className="flex items-center gap-1 p-2 border-b dark:border-white/20 border-b-black/80"
-                  >
-                    <FaGithub className="text-lg" />
-                    Github
-                  </a>
-                )}
-                {project.link && (
-                  <a
-                    target="_blank"
-                    href={project.link}
-                    className="flex items-center gap-1 p-2 border-b dark:border-white/20 border-b-black/80"
-                  >
-                    <IoEye className="text-2xl" />
-                    Live
-                  </a>
-                )}
-              </div>
-              {/* <button>
-                <FaGithub className="text-lg" />
-              </button>
-              <button>
-                <FaEye className="text-2xl" />
-              </button> */}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white dark:bg-slate-950 dark:text-white te px-6 py-2 rounded-xl border drop-shadow-md md:text-base text-sm"
-                >
-                  {tech}
+              {/* Project Preview Image */}
+              <a
+                target="_blank"
+                href={project.link}
+                className="relative group flex items-center justify-center rounded-md overflow-hidden border-2 border-gray-200 dark:border-slate-700 hover:border-[#424242] dark:hover:border-white/40 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r z-10 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-2">
+                    <IoEye className="text-5xl text-white/90" />
+                    <span className="text-white font-semibold text-lg">
+                      View Live
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <Image
+                  src={project.imageSrc}
+                  width={600}
+                  height={400}
+                  alt={project.title}
+                  className="w-full"
+                />
+              </a>
+
+              {/* Project Title & Links */}
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <h3 className="text-2xl font-bold text-black dark:text-white">
+                  {highlightText(project.title, searchQuery)}
+                </h3>
+                <div className="flex gap-2">
+                  {project?.github && (
+                    <a
+                      target="_blank"
+                      href={project.github}
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-md transition-all duration-200 font-medium text-sm"
+                    >
+                      <FaGithub className="text-lg" />
+                      GitHub
+                    </a>
+                  )}
+                  {project.link && (
+                    <a
+                      target="_blank"
+                      href={project.link}
+                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-all duration-200 font-medium text-sm"
+                    >
+                      <IoEye className="text-xl" />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Technologies Pills */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3 uppercase tracking-wide">
+                  Tech Stack
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-1.5 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-slate-700 dark:to-slate-900 text-black dark:text-white border border-gray-300 dark:border-slate-600 rounded-full text-sm font-medium hover:scale-105 transition-transform duration-200 shadow-sm"
+                    >
+                      {highlightText(tech, searchQuery)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Project Description */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3 uppercase tracking-wide">
+                  Key Features
+                </h4>
+                <ul className="space-y-2.5">
+                  {project.description.map((desc, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 text-gray-700 dark:text-white/90 text-sm leading-relaxed"
+                    >
+                      <span className="mt-1.5 w-1.5 h-1.5 bg-[#424242] dark:bg-white/70 rounded-full flex-shrink-0" />
+                      <span>{highlightText(desc, searchQuery)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <ul
-              style={{
-                paddingLeft: "1.2rem",
-                textIndent: "-1.2rem",
-              }}
-              className="list-disc list-inside space-y-2 text-lg font-medium text-gray-700 dark:text-white/80"
-            >
-              {project.description.map((desc, idx) => (
-                <li key={idx}>{desc}</li>
-              ))}
-            </ul>
+          ))
+        ) : (
+          <div className="border-2 border-[#424242] dark:border-white/20 rounded-lg bg-white dark:bg-slate-800 p-10 text-center">
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              No projects found matching "{searchQuery}"
+            </p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

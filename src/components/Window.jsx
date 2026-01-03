@@ -24,6 +24,7 @@ const Window = ({
     <motion.div
       drag
       dragControls={controls}
+      dragMomentum={false}
       dragConstraints={containerRef}
       className={cn(
         `md:block hidden w-full z-10 space-y-[1px] absolute top-[15%] left-[30%] ml-5`,
