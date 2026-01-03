@@ -2,8 +2,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { useState } from "react";
 
 // Setup worker
-pdfjs.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.worker.min.mjs";
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PDFViewer = () => {
   const [numPages, setNumPages] = useState(null);
