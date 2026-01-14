@@ -33,7 +33,6 @@ This project is a playful, interactive desktop-like experience built with **Next
 
 - [Next.js](https://nextjs.org/)
 - [Framer Motion](https://www.framer.com/motion/)
-- [React Icons](https://react-icons.github.io/react-icons/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ---
@@ -51,10 +50,10 @@ This project is a playful, interactive desktop-like experience built with **Next
 
 ```bash
 # Clone the repo
-git clone https://github.com/AbdelrahmanMostafa0/abdelrahmanmostafa.git
+git clone https://github.com/AbdelrahmanMostafa0/portfolio.git
 
 # Go into the project directory
-cd abdelrahmanmostafa
+cd portfolio
 
 # Install dependencies
 npm install
