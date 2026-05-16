@@ -89,12 +89,23 @@ const MainWindow = ({ setOpenedWindow }) => {
       >
         {/* Header Section */}
         <div className="pt-6 md:pt-10 text-center space-y-3 md:space-y-4">
+          {/* Availability badge */}
+          {/* <div className="flex justify-center">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-700">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              Available for work
+            </span>
+          </div> */}
           <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white leading-tight">
             hi!{" "}
             <span className="text-orange-500 dark:text-blue-300">
               i'm abdelrahman
             </span>
           </h1>
+          {/* <p className="text-base md:text-lg font-semibold text-gray-500 dark:text-gray-400 tracking-wide">
+            Frontend Developer &middot; React / Next.js &middot; Open to
+            freelance & full-time
+          </p> */}
           <p className="text-lg md:text-2xl min-h-7 md:min-h-9 dark:text-white px-4">
             {randomTagline}
           </p>

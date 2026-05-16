@@ -26,7 +26,7 @@ const projects = [
     link: "https://b8lnk.vercel.app",
     github: "https://github.com/AbdelrahmanMostafa0/b8lnk",
     backendGithub: "https://github.com/AbdelrahmanMostafa0/b8lnk-api",
-    imageSrc: "/work/b8lnk.png",
+    imageSrc: "/work/b8lnk.webp",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -46,7 +46,7 @@ const projects = [
   {
     title: "Lesoll",
     link: "https://lesoll.com",
-    imageSrc: "/work/lesoll.png",
+    imageSrc: "/work/lesoll.webp",
     technologies: [
       "React",
       "Next.js",
@@ -71,7 +71,7 @@ const projects = [
     title: "Dorymart",
     link: "https://dory-mart.vercel.app",
     github: "https://github.com/AbdelrahmanMostafa0/dory-mart",
-    imageSrc: "/work/dory.png",
+    imageSrc: "/work/dory.webp",
     technologies: [
       "React",
       "Next.js",
@@ -93,7 +93,7 @@ const projects = [
     title: "Sa3teen Gad",
     link: "https://sa3teen-gad.vercel.app/",
     github: "https://github.com/AbdelrahmanMostafa0/sa3teen-gad",
-    imageSrc: "/work/sa3teen-gad.png",
+    imageSrc: "/work/sa3teen-gad.webp",
     technologies: [
       "Next.js (App Router & API Routes)",
       "React",
@@ -115,7 +115,7 @@ const projects = [
     title: "Squash It",
     link: "https://image-compressor-gules.vercel.app/ar",
     github: "https://github.com/AbdelrahmanMostafa0/image-compressor",
-    imageSrc: "/work/squash-it-light.png",
+    imageSrc: "/work/squash-it-light.webp",
     technologies: [
       "React",
       "Next.js",
@@ -135,7 +135,7 @@ const projects = [
   {
     title: "The Palestinian World",
     link: "https://the-palestinian-world.vercel.app/",
-    imageSrc: "/work/the-palestinian-world.png",
+    imageSrc: "/work/the-palestinian-world.webp",
     technologies: ["HTML Canvas", "JavaScript", "HTML", "CSS"],
     description: [
       "Visual solidarity tool to overlay the Palestinian flag frame on user images",
