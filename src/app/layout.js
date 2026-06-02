@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import { WindowProvider } from "@/context/WindowsContext";
 import { Analytics } from "@vercel/analytics/next";
 import StructuredData from "@/components/seo/StructuredData";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 import { siteConfig, siteUrl } from "@/lib/site";
 
 export const metadata = {
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
           <MobileWarning />
         </WindowProvider>
         <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   );
