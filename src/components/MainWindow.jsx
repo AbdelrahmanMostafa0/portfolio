@@ -96,12 +96,12 @@ const MainWindow = ({ setOpenedWindow }) => {
               Available for work
             </span>
           </div> */}
-          <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white leading-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold dark:text-white leading-tight">
             hi!{" "}
             <span className="text-orange-500 dark:text-blue-300">
               i'm abdelrahman
             </span>
-          </h1>
+          </h2>
           {/* <p className="text-base md:text-lg font-semibold text-gray-500 dark:text-gray-400 tracking-wide">
             Frontend Developer &middot; React / Next.js &middot; Open to
             freelance & full-time

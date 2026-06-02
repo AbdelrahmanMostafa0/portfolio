@@ -11,7 +11,7 @@ const Links = () => {
         >
           <Image
             src={"/icons/social-media/github.png"}
-            alt="discord"
+            alt="GitHub profile"
             width={50}
             height={50}
             className="w-24 dark:"
@@ -30,7 +30,7 @@ const Links = () => {
         >
           <Image
             src={"/icons/social-media/linkedin.png"}
-            alt="discord"
+            alt="LinkedIn profile"
             width={50}
             height={50}
             className="w-24 dark:"
@@ -64,7 +64,7 @@ const Links = () => {
         >
           <Image
             src={"/icons/social-media/instagram.png"}
-            alt="discord"
+            alt="Instagram profile"
             width={50}
             height={50}
             className="w-24 dark:"

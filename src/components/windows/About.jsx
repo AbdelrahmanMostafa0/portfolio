@@ -3,18 +3,7 @@ import Link from "next/link";
 import { useMemo, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { cn } from "@/utils/cn";
-const DEVELOPMENT = [
-  "HTML / CSS",
-  "javascript",
-  "React.js",
-  "Next.js",
-  "Tailwind CSS",
-  "Redux",
-  "Redux toolkit",
-  "GSAP",
-  "Framer Motion",
-];
-const TOOLS = ["Git", "AWS", "Figma", "VS Code", "Postman", "Canva", "Blender"];
+import { DEVELOPMENT, TOOLS } from "@/data/skills";
 const images = [
   "/personal-images/img-1.png",
   "/personal-images/img-2.png",
@@ -269,9 +258,15 @@ const About = () => {
 };
 
 export default About;
-const FadeInImage = ({ src, delay = 0, className }) => {
+const FadeInImage = ({ src, delay = 0, className, alt }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const fallbackAlt =
+    alt ||
+    `Personal memory — ${src
+      .split("/")
+      .pop()
+      .replace(/\.[^.]+$/, "")}`;
 
   return (
     <motion.div
@@ -283,7 +278,7 @@ const FadeInImage = ({ src, delay = 0, className }) => {
     >
       <Image
         src={src}
-        alt="memory"
+        alt={fallbackAlt}
         width={1000}
         height={1000}
         className="w-full h-full object-cover rounded-lg"

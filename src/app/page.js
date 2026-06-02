@@ -7,6 +7,7 @@ import { useWindowWidth } from "@/hooks/useWindowWidth";
 import RenderMobileWindow from "@/components/RenderMobileWindow";
 import { AnimatePresence } from "framer-motion";
 import LoadingScreen from "@/components/LoadingScreen";
+import SEOContent from "@/components/seo/SEOContent";
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -27,6 +28,7 @@ export default function Home() {
       ref={containerRef}
       className="grid h-dvh place-content-center overflow-hidden overscroll-none w-screen  dark:bg-slate-900"
     >
+      <SEOContent />
       {showLoading && <LoadingScreen />}
       <MainWindow />
       <div className="fixed top-0  dark:hidden left-0 w-full h-full bg-gradient-to-b from-blue-500 to-blue-300 opacity-50 z-0"></div>

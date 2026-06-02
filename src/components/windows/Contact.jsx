@@ -75,7 +75,7 @@ function Spinner() {
 }
 
 const Contact = () => {
-  const email = "abdelrahmanmostafa.developer@email.com";
+  const email = "abdelrahmanmostafa.developer@gmail.com";
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
