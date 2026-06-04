@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { rateLimit } from "@/lib/ratelimit";
+import { sendContactEmail } from "@/lib/email";
 
 const NAME_MIN = 2;
 const MESSAGE_MIN = 10;
@@ -64,6 +65,12 @@ export async function POST(request) {
       ip,
       createdAt: new Date(),
     });
+
+    try {
+      await sendContactEmail({ name, email, message });
+    } catch (emailErr) {
+      console.error("[contact] Email send failed:", emailErr);
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
