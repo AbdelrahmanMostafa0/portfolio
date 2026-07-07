@@ -1,9 +1,5 @@
-import Header from "@/components/Header";
-import MobileWarning from "@/components/MobileWarning";
 import "../styles/globals.css";
-import { WindowProvider } from "@/context/WindowsContext";
 import { Analytics } from "@vercel/analytics/next";
-import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 import { siteConfig, siteUrl } from "@/lib/site";
 
@@ -21,7 +17,7 @@ export const metadata = {
   publisher: siteConfig.name,
   category: "technology",
   alternates: {
-    canonical: "/",
+    canonical: "https://abdelrahmanmostafa.com",
   },
   openGraph: {
     type: "website",
@@ -73,13 +69,8 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang={siteConfig.language}>
-      <body className={`font-quicksand `}>
-        <StructuredData />
-        <WindowProvider>
-          <Header />
-          {children}
-          <MobileWarning />
-        </WindowProvider>
+      <body className="font-quicksand">
+        {children}
         <Analytics />
         <GoogleAnalytics />
       </body>
